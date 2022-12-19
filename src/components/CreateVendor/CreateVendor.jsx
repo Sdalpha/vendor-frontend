@@ -35,7 +35,7 @@ function CreateVendor({ closeModal,fetchTableData }) {
     console.log(data);
     await axios({
         method: "POST",
-        url: `http://localhost:5000/api/vendor/createVendor`,
+        url: `${process.env.REACT_APP_DOMAIN_KEY}/api/vendor/createVendor`,
         data: data,
       }).then(res=>{
             if(res.status===200){

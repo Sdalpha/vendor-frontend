@@ -31,7 +31,7 @@ function EditModal({ closeModal,fetchTableData, editData }) {
     data.vendorId = editData._id
     await axios({
         method: "PUT",
-        url: `http://localhost:5000/api/vendor/vendorEdit`,
+        url: `${process.env.REACT_APP_DOMAIN_KEY}/api/vendor/vendorEdit`,
         data: data,
       }).then(res=>{
             if(res.status===200){

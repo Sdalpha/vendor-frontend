@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function Confirmation({closeModal, vendorId, fetchTableData}) {
 
     const deleteData = ()=>{
-        axios.delete(`http://localhost:5000/api/vendor/deleteVendor/${vendorId}`)
+        axios.delete(`${process.env.REACT_APP_DOMAIN_KEY}/api/vendor/deleteVendor/${vendorId}`)
         .then((res)=>{
             console.log(res)
             if(res.status===200){
