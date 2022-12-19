@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useState} from "react";
 import "./EditModal.css";
 import { GrClose } from "react-icons/gr";
 import { useFormik } from "formik";
@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function EditModal({ closeModal,fetchTableData, editData }) {
 
-
+  const [load,setLoad]=useState(false)
   const formik = useFormik({
     initialValues: {
       vendorName: editData.vendorName,
@@ -27,15 +27,16 @@ function EditModal({ closeModal,fetchTableData, editData }) {
   });
 
   const fetchData = async (data) => {
-    console.log(data);
+    setLoad(true)
     data.vendorId = editData._id
     await axios({
         method: "PUT",
         url: `${process.env.REACT_APP_DOMAIN_KEY}/api/vendor/vendorEdit`,
         data: data,
       }).then(res=>{
+        setLoad(false)
             if(res.status===200){
-                toast.success(res.data.message)
+               
                 fetchTableData()
                 
             }else{
@@ -48,6 +49,13 @@ function EditModal({ closeModal,fetchTableData, editData }) {
   };
 
 
+  //loader
+
+if(load){
+  return(<>
+      <div className="mid_loader">Loading...</div>
+  </>)
+}
 
   return (
     <div className="modal">

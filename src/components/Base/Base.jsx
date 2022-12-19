@@ -12,32 +12,47 @@ const Base = () => {
     const [tableData,setTableData] = useState([]);
     const [currentPage,setCurrentPage] = useState(1);
     const [PerPage] = useState(10);
+    const [load,setLoad]=useState(false)
 
+    
     useEffect(()=>{
         fetchTableData()
     },[])
 
     const fetchTableData= async()=>{
+        setLoad(true)
         await axios({
         method: "get",
         url: `${process.env.REACT_APP_DOMAIN_KEY}/api/vendor/getAllVendors`,
       }).then(res=>{
             if(res.status===200){
-                console.log(res)
+                setLoad(false)
                 setTableData(res.data.data)
             }else{
+                setLoad(false)
                 alert("Something Went Wrong...")
             }
       }).catch(err=>{
             console.log(err)
+            setLoad(false)
             alert("Something Went Wrong...")
       })
     }
 
 
+    //loader
 
+    if(load){
+        return(<>
+            <div className="mid_loader">Loading...</div>
+        </>)
+    }
+    
+    
+    
+    
     //get current post
-
+    
     const indexOfLast = currentPage * PerPage;
     const indexOfFirst = indexOfLast - PerPage;
     const currentRow = tableData.slice(indexOfFirst, indexOfLast)

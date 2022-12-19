@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { GrClose } from "react-icons/gr";
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,12 +6,16 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Confirmation({closeModal, vendorId, fetchTableData}) {
 
+    const [load,setLoad]=useState(false)
+
     const deleteData = ()=>{
+        setLoad(true)
         axios.delete(`${process.env.REACT_APP_DOMAIN_KEY}/api/vendor/deleteVendor/${vendorId}`)
         .then((res)=>{
             console.log(res)
+            setLoad(false)
             if(res.status===200){
-                toast.success("Deleted Successfully")
+               
                 fetchTableData()
                 closeModal(false)
             }else{
@@ -23,6 +27,17 @@ function Confirmation({closeModal, vendorId, fetchTableData}) {
             toast.error(err.message)
         })
     }
+
+
+
+
+    //loader
+
+if(load){
+    return(<>
+        <div className="mid_loader">Loading...</div>
+    </>)
+  }
 
   return (
     <div>

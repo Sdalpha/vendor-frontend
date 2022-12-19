@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useState} from "react";
 import "./CreateVendor.css";
 import { GrClose } from "react-icons/gr";
 import { useFormik } from "formik";
@@ -8,6 +8,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CreateVendor({ closeModal,fetchTableData }) {
+
+  const [load,setLoad]=useState(false)
+
+  
+
   const validationSchema = yup.object({
     vendorName: yup.string().required("*Required Feild"),
     bankAccountNo: yup.string().required("*Required Feild"),
@@ -32,25 +37,34 @@ function CreateVendor({ closeModal,fetchTableData }) {
   });
 
   const fetchData = async (data) => {
-    console.log(data);
+    setLoad(true)
     await axios({
         method: "POST",
         url: `${process.env.REACT_APP_DOMAIN_KEY}/api/vendor/createVendor`,
         data: data,
       }).then(res=>{
             if(res.status===200){
+                setLoad(false)
                 toast.success(res.data.message)
                 fetchTableData()
-                
             }else{
+                setLoad(false)
                 toast.error(res.data.message)
             }
       }).catch(err=>{
             console.log(err)
+            setLoad(false)
             toast.error(err.message)
       })
   };
 
+//loader
+
+if(load){
+  return(<>
+      <div className="mid_loader">Loading...</div>
+  </>)
+}
 
 
   return (
