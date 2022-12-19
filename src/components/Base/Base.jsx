@@ -20,7 +20,7 @@ const Base = () => {
     const fetchTableData= async()=>{
         await axios({
         method: "get",
-        url: `http://localhost:5000/api/vendor/getAllVendors`,
+        url: `${process.env.REACT_APP_DOMAIN_KEY}/api/vendor/getAllVendors`,
       }).then(res=>{
             if(res.status===200){
                 console.log(res)
