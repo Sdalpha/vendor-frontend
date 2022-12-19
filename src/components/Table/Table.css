@@ -1,0 +1,68 @@
+.tableContainer{
+    width: 70%;
+    height: 80%;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.tableContainer table {
+   border-collapse: collapse;
+   font-size: 0.9rem;
+   width: 100%;
+  }
+
+  .tableContainer thead {
+    background-color: #f3f3f3;
+    
+  }
+  
+  .tableContainer thead  tr{
+    background-color: #2e3a4a;
+    border-radius: 8px 8px 0px 0px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-align: start;
+  }
+  
+.tableContainer th,
+.tableContainer td{
+  padding: 12px 15px;
+
+}
+.tableContainer tbody tr{
+  border-bottom: 1px solid #dddddd;
+}
+.tableContainer tbody tr:nth-of-type(even){
+  background-color: #f3f3f393;
+}
+.tableContainer tbody tr:last-of-type{
+  border-bottom: 1px solid #2e3a4a;
+}
+  
+.tableContainer tbody tr:hover {
+    background-color: #f6f6f6;
+  }
+
+  .action_td{
+    display: flex;
+    gap: 5px;
+  }
+  .action_td button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 5px;
+  }
+  .action_td button:nth-child(1){
+    color: rgb(74, 122, 235);
+  }
+  .action_td button:nth-child(2){
+    color: rgb(238, 59, 59);
+  }
+  .text-center{
+    width: 100%;
+    text-align: center;
+  }
